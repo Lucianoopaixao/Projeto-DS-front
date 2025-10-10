@@ -3,7 +3,7 @@ import Question from "./Question";
 
 /*exportando e moldando o quizz*/
 
-export default function Quiz() {
+export default function Quiz({ voltarinicio }) {
   const questions = [
     {
       pergunta: "Qual dessas ISTs não possui vacina?",
@@ -52,6 +52,7 @@ export default function Quiz() {
         <p>
           You scored {pontuacao} of {questions.length}
         </p>
+        <button onClick={voltarinicio}>Voltar ao início</button>
       </div>
     );
   }

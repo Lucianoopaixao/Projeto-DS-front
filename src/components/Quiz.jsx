@@ -87,10 +87,12 @@ export default function Quiz({ voltarinicio }) {
   if (fimdoquiz) {
     return (
       <div className="result">
-        <h1>End of teste ISTs quizz</h1>
-        <p>
-          You scored {pontuacao} of {questions.length}
-        </p>
+        <h1>Fim do Quiz!</h1>
+        <p>Suas moedas: {pontuacao}</p>
+        <p>100% concluído!</p>
+        <p>Total de Questões: {questions.length}</p>
+        <p>Questões corretas: {pontuacao}</p>
+        <p>Questões erradas: {questions.length - pontuacao}</p>
         <button onClick={voltarinicio}>Voltar ao início</button>
       </div>
     );

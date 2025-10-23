@@ -2,6 +2,7 @@ import { useState } from "react";
 import Question from "./Question";
 
 /*exportando e moldando o quizz*/
+//////////////ATENCAO, BOTEI AS PERGUNTAS NUM BANCO DE DADOS. TEM QUE MUDAR O JEITO QUE ESTA PARA O FRONT FAZER A REQUISIÇÃO
 
 export default function Quiz({ voltarinicio }) {
   const questions = [

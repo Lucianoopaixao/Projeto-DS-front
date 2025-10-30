@@ -1,5 +1,7 @@
 import "./App.css";
 import Quiz from "./components/Quiz";
+import FollowTreatment from "./components/FollowTreatment";
+import RegisterAppointment from "./components/RegisterAppointment";
 import { useState } from "react";
 
 export default function App() {
@@ -33,9 +35,7 @@ export default function App() {
       <div>
         <h1>Saúde em Jogo</h1>
         <button onClick={() => setTela("inicioquiz")}>Quiz sobre ISTs</button>
-        <button onClick={() => setTela("inicitratamento")}>
-          Acompanhar tratamento
-        </button>
+        <button onClick={() => setTela("acompanhar")}>Acompanhar tratamento</button>
       </div>
     );
   }
@@ -54,5 +54,28 @@ export default function App() {
   /*quiz em si*/
   if (tela === "quiz") {
     return <Quiz voltarinicio={() => setTela("Início")} />;
+  }
+
+  /*Tela de acompanhamento*/
+  if (tela === "acompanhar") {
+    return (
+      <FollowTreatment
+        onBack={() => setTela("Início")}
+        onFirstAction={() => setTela("registrar-consulta")}
+        onSecondAction={() => {
+          // Exemplo: abrir formulário de contato
+          setTela("Início"); // ajuste para a tela que desejar
+        }}
+      />
+    );
+  }
+
+  /*Tela de registro de consulta*/
+  if (tela === "registrar-consulta") {
+    return (
+      <RegisterAppointment
+        onBack={() => setTela("acompanhar")}
+      />
+    );
   }
 }

@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import "./RegisterAppointment.css";
 
 export default function RegisterAppointment({ onBack }) {
   const [selectedImage, setSelectedImage] = useState(null);
@@ -22,40 +23,40 @@ export default function RegisterAppointment({ onBack }) {
   };
 
   return (
-    <div className="register-appointment">
-            <h1 style={{ fontSize: "1.5rem" }}>Registrar Consulta</h1>
+    <div className="form-wrapper">
+      <h1 className="form-title">Registrar Consulta</h1>
       <p>Envie uma foto do seu comprovante de comparecimento:</p>
       <div className="upload-section">
         <input
           type="file"
           accept="image/*"
           onChange={handleImageChange}
-          style={{ marginBottom: "1rem" }}
+          className="file-input"
         />
-        
+
         {selectedImage && (
-          <div style={{ margin: "1rem 0" }}>
+          <div className="select-file">
             <p>Arquivo selecionado: {selectedImage.name}</p>
           </div>
         )}
 
-        <button 
+        <button
+          type="button"
+          className="btn btn-primary"
           onClick={handleSubmit}
-          style={{ 
-            backgroundColor: "#445da9ff",
-            color: "white",
-            padding: "10px 20px",
-            border: "none",
-            borderRadius: "4px",
-            cursor: "pointer"
-          }}
         >
           Enviar Comprovante
         </button>
       </div>
 
-      <div style={{ marginTop: "2rem" }}>
-        <button onClick={onBack}>Voltar</button>
+      <div
+        className="actions-footer"
+        role="group"
+        aria-label="Ações do formulário"
+      >
+        <button type="button" className="btn btn-secondary" onClick={onBack}>
+          Voltar
+        </button>
       </div>
     </div>
   );

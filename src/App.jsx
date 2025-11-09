@@ -3,11 +3,12 @@ import Quiz from "./components/Quiz";
 import FollowTreatment from "./components/FollowTreatment";
 import RegisterAppointment from "./components/RegisterAppointment";
 import { useState } from "react";
+import Check from "./components/Check";
 
 export default function App() {
   const [tela, setTela] = useState("Introdução");
+  const [documentAccepted, setDocumentAccepted] = useState(false);
 
-  /*fazendo os condicionais de telas de inicio e botoes!*/
   /*Tela explicativa */
   if (tela === "Introdução") {
     return (
@@ -21,7 +22,7 @@ export default function App() {
           diagnóstico e tratamento de ISTs, no seu tempo e da sua forma, para
           entender sintomas, avaliar riscos ou receber uma recomendação
           personalizada sobre testagem, comece pelo Quiz. Se você já está em
-          tratamento ou tem uma consulta agendada, seu acesso direto para o
+          tratamento ou fez uma consulta, seu acesso direto para o
           cuidado é o Acompanhamento do tratamento.
         </p>
         <button onClick={() => setTela("Início")}>Continuar</button>
@@ -62,19 +63,23 @@ export default function App() {
       <FollowTreatment
         onBack={() => setTela("Início")}
         onFirstAction={() => setTela("registrar-consulta")}
-        onSecondAction={() => {
-          // Exemplo: abrir formulário de contato
-          setTela("Início"); // ajuste para a tela que desejar
-        }}
+        onSecondAction={() => setTela("check")}
       />
     );
   }
 
   /*Tela de registro de consulta*/
   if (tela === "registrar-consulta") {
+    return <RegisterAppointment onBack={() => setTela("acompanhar")} />;
+  }
+
+  /*Tela de check-in*/
+  if (tela === "check") {
     return (
-      <RegisterAppointment
+      <Check
         onBack={() => setTela("acompanhar")}
+        documentAccepted={documentAccepted}
+        setDocumentAccepted={setDocumentAccepted}
       />
     );
   }

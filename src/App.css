@@ -14,7 +14,7 @@ div {
   padding: 40px 30px;
   background: #ffffff;
   border-radius: 20px;
-  box-shadow: 0 6px 25px rgba(0, 92, 184, 0.15);
+  
   text-align: center;
   transition: all 0.3s ease-in-out;
 }

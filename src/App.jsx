@@ -34,9 +34,11 @@ export default function App() {
   if (tela === "Início") {
     return (
       <div>
-        <h1>Saúde em Jogo</h1>
+        <h1 className="linicio">Saúde em Jogo</h1>
         <button onClick={() => setTela("inicioquiz")}>Quiz sobre ISTs</button>
-        <button onClick={() => setTela("acompanhar")}>Acompanhar tratamento</button>
+        <button onClick={() => setTela("acompanhar")}>
+          Acompanhar tratamento
+        </button>
       </div>
     );
   }

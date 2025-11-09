@@ -14,7 +14,7 @@ div {
   padding: 40px 30px;
   background: #ffffff;
   border-radius: 20px;
-  
+
   text-align: center;
   transition: all 0.3s ease-in-out;
 }
@@ -77,4 +77,10 @@ button:active {
   button {
     width: 100%;
   }
+}
+
+.linicio {
+  /*linha desalinhada*/
+  text-align: center;
+  margin-top: -10px;
 }

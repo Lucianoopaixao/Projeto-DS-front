@@ -22,7 +22,7 @@ export default function App() {
           diagnóstico e tratamento de ISTs, no seu tempo e da sua forma, para
           entender sintomas, avaliar riscos ou receber uma recomendação
           personalizada sobre testagem, comece pelo Quiz. Se você já está em
-          tratamento ou fez uma consulta, seu acesso direto para o
+          tratamento ou fez uma consulta recentemente, seu acesso direto para o
           cuidado é o Acompanhamento do tratamento.
         </p>
         <button onClick={() => setTela("Início")}>Continuar</button>

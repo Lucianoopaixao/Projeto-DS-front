@@ -1,10 +1,14 @@
-import React from "react";
+import "./FollowTreatment.css";
 
-export default function FollowTreatment({ onBack, onFirstAction, onSecondAction }) {
+export default function FollowTreatment({
+  onBack,
+  onFirstAction,
+  onSecondAction,
+}) {
   return (
     <div className="acompanhar-tratamento">
       <h1>Acompanhamento do tratamento</h1>
-      <p>
+      <p className="pcadastro">
         Cadastre e faça check-in de seus medicamentos e registre suas consultas
         para ganhar moedas!
       </p>

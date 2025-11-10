@@ -53,6 +53,66 @@ export default function Quiz({ voltarinicio }) {
       explicacaoerrada:
         "A resposta correta é VACINA CONTRA HPV, porque ela ajuda a prevenir uma das ISTs mais comuns e que pode causar câncer no colo do útero e em outras regiões do corpo.",
     },
+    {
+      pergunta:
+        "Qual das alternativas abaixo NÃO é uma forma de transmissão da HIV:",
+      alternativas: [
+        "Um beijo ou abraço com uma pessoa contaminada",
+        "Compartilhamento de agulhas",
+        "Relação sexual desprotegida",
+        "Na gestação, parto ou amamentação de uma pessoa contaminada",
+      ],
+      resposta: "Na gestação, parto ou amamentação de uma pessoa contaminada",
+      explicacaocerta:
+        "Para acontecer a transmissão, o fluido corporal contaminado (sangue, esperma, secreção vaginal e leite materno) de uma pessoa tem que penetrar no organismo da outra. NÃO há risco de transmissão em um BEIJO OU ABRAÇO COM UMA PESSOA CONTAMINADA se não houver essa troca de fluidos.",
+      explicacaoerrada:
+        "A resposta correta é UM BEIJO OU ABRAÇO COM UMA PESSOA CONTAMINADA. Para acontecer a transmissão, o fluido corporal contaminado (sangue, esperma, secreção vaginal e leite materno) de uma pessoa tem que penetrar no organismo da outra. NÃO há risco de transmissão em UM BEIJO OU ABRAÇO COM UMA PESSOA CONTAMINADA se não houver essa troca de fluidos.",
+    },
+    {
+      pergunta: "Sobre o diagnóstico de ISTs, marque a alternativa CORRETA:",
+      alternativas: [
+        "Não há necessidade de fazer testes com regularidade, mesmo tendo passado por uma situação de risco.",
+        "Não existe cura para as ISTs.",
+        "Algumas ISTs podem ser curadas.",
+        "Todos os testes de ISTs são pagos.",
+      ],
+      resposta: "Algumas ISTs podem ser curadas.",
+      explicacaocerta:
+        "Testes regulares após passar por uma situação de risco (como uma relação sexual desprotegida) são essenciais para se ter um diagnóstico precoce, o qual permite um tratamento eficaz. ALGUMAS ISTS PODEM SER CURADAS se tratadas IMEDIATAMENTE e CORRETAMENTE, seguindo orientações médicas. Alguns exemplos de infecções curáveis são: sífilis, gonorreia, clamídia e tricomoníase. Além disso, os testes podem ser realizados GRATUITAMENTE pelo SUS.",
+      explicacaoerrada:
+        "A resposta correta é ALGUMAS ISTS PODEM SER CURADAS. Se o paciente iniciar o tratamento IMEDIATAMENTE e SEGUIR TODAS AS ORIENTAÇÕES MÉDICAS, infecções como sífilis, gonorreia, clamídia e tricomoníase podem ser curadas. Testes regulares após passar por uma situação de risco (como uma relação sexual desprotegida) são essenciais para se ter um diagnóstico precoce, o qual permite um tratamento eficaz, e esses testes podem ser realizados GRATUITAMENTE pelo SUS.",
+    },
+    {
+      pergunta:
+        "Uma característica perigosa de muitas ISTs, como a Clamídia e a Gonorreia em estágios iniciais, é que elas podem ser:",
+      alternativas: [
+        "Transmitidas apenas por fluidos sanguíneos",
+        "Incuráveis mesmo com tratamento antibiótico",
+        "Prevenidas com a vacina contra o HPV",
+        "Assintomáticas na maioria das pessoas, especialmente em mulheres",
+      ],
+      resposta:
+        "Assintomáticas na maioria das pessoas, especialmente em mulheres",
+      explicacaocerta:
+        "O fato de muitas ISTs NÃO APRESENTAREM SINTOMAS CLAROS INICIALMENTE leva à falta de diagnóstico e tratamento, permitindo que a infecção avance e seja transmitida.",
+      explicacaoerrada:
+        "A resposta correta é ASSINTOMÁTICAS NA MAIORIA DAS PESSOAS, ESPECIALMENTE MULHERES. O fato de muitas ISTs não apresentarem sintomas claros inicialmente leva à falta de diagnóstico e tratamento, permitindo que a infecção avance e seja transmitida.",
+    },
+    {
+      pergunta:
+        "Qual sintoma é comumente associado à Gonorreia e à Clamídia, especialmente em homens?",
+      alternativas: [
+        "Bolhas ou feridas dolorosas no genital.",
+        "Manchas avermelhadas indolores no corpo.",
+        "Corrimento uretral (peniano) e dor ao urinar (disúria).",
+        "Verrugas na região genital.",
+      ],
+      resposta: "Corrimento uretral (peniano) e dor ao urinar (disúria).",
+      explicacaocerta:
+        "Tanto a Gonorreia quanto a Clamídia causam inflamação da uretra (uretrite), resultando em secreção (corrimento) e dor ao urinar em muitos casos.",
+      explicacaoerrada:
+        "A resposta correta é CORRIMENTO URETRAL (PENIANO) E DOR AO URINAR (DISÚRIA). Tanto a Gonorreia quanto a Clamídia causam inflamação da uretra (uretrite), resultando em secreção (corrimento) e dor ao urinar em muitos casos.",
+    },
   ];
 
   const [indicep, setIndicep] = useState(0);

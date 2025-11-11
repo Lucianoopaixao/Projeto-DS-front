@@ -1,12 +1,13 @@
-/*exportando*/
+import React from "react";
+import "./Quiz.css";
 
-export default function Question({ questoes, alternativas, resposta }) {
+export default function Question({ pergunta, alternativas, onResposta }) {
   return (
-    <div className="pergunta">
-      <h2>{questoes}</h2>
-      <div>
-        {alternativas.map((alternativa, a) => (
-          <button key={a} onClick={() => resposta(alternativa)}>
+    <div className="question-wrapper">
+      <h2>{pergunta}</h2>
+      <div className="alternativas">
+        {alternativas.map((alternativa, index) => (
+          <button key={index} onClick={() => onResposta(alternativa)}>
             {alternativa}
           </button>
         ))}

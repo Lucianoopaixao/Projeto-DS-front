@@ -6,16 +6,12 @@ export default function RegisterAppointment({ onBack }) {
 
   const handleImageChange = (event) => {
     const file = event.target.files[0];
-    if (file) {
-      setSelectedImage(file);
-    }
+    if (file) setSelectedImage(file);
   };
 
   const handleSubmit = () => {
     if (selectedImage) {
-      // Aqui você pode adicionar a lógica para enviar a imagem
       console.log("Imagem selecionada:", selectedImage);
-      // Exemplo: criar FormData e enviar para API
       alert("Comprovante enviado com sucesso!");
     } else {
       alert("Por favor, selecione uma imagem primeiro");
@@ -23,7 +19,7 @@ export default function RegisterAppointment({ onBack }) {
   };
 
   return (
-    <div className="form-wrapper">
+    <div className="inner-wrapper">
       <h1 className="form-title">Registrar Consulta</h1>
       <p>Envie uma foto do seu comprovante de comparecimento:</p>
       <div className="upload-section">
@@ -35,25 +31,17 @@ export default function RegisterAppointment({ onBack }) {
         />
 
         {selectedImage && (
-          <div className="select-file">
+          <div className="selected-file">
             <p>Arquivo selecionado: {selectedImage.name}</p>
           </div>
         )}
 
-        <button
-          type="button"
-          className="btn btn-primary"
-          onClick={handleSubmit}
-        >
+        <button type="button" className="btn btn-primary" onClick={handleSubmit}>
           Enviar Comprovante
         </button>
       </div>
 
-      <div
-        className="actions-footer"
-        role="group"
-        aria-label="Ações do formulário"
-      >
+      <div className="actions-footer">
         <button type="button" className="btn btn-secondary" onClick={onBack}>
           Voltar
         </button>

@@ -1,77 +1,148 @@
-.form-wrapper {
-  display: flex;
-  flex-direction: column;
-  max-width: 900px;
-  margin: 24px auto;
-  padding: 20px;
-  gap: 16px;
-  background: #fff;
-  border-radius: 8px;
-  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.06);
-}
-
-.form-title {
-  font-size: 1.5rem;
-  margin-bottom: 16px;
-  color: #0f2b68;
-}
-
-.upload-section {
-  border: 2px dashed #cbd5e1;
-  border-radius: 8px;
-  padding: 20px;
-  text-align: center;
-  background-color: #f9fafb;
-}
-
-.upload-section:hover {
-  border-color: #0f2b68;
-  background-color: #f1f5f9;
-}
-
-.selected-file {
-  margin: 1rem 0;
-  padding: 8px;
-  background-color: #f3f4f6;
-  border-radius: 4px;
-  border: 1px solid #e5e7eb;
-}
-
-.form-body {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.text-input {
-  padding: 8px;
-  border-radius: 6px;
-  border: 1px solid #cbd5e1;
+/* ================= Reset e CSS global ================= */
+html, body, #root {
+  margin: 0;
+  padding: 0;
   width: 100%;
+  min-height: 100vh;
+  font-family: "Poppins", "Segoe UI", sans-serif;
+  color: #0f172a;
+  background-image: url('../imagens/fundo-comum.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  overflow-y: auto;
 }
 
+/* ================= Bloco principal ================= */
+
+.form-wrapper {
+  width: 90%;
+  max-width: 840px;  /* aumentei de 720px para 840px */
+  margin: 30px auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.1);
+  text-align: center;
+}
+
+
+/* ================= Títulos e textos ================= */
+.form-title {
+  font-size: 1.8rem; 
+  color: #0f2b68;
+  margin-bottom: 12px;
+}
+
+p {
+  font-size: 1rem; 
+  color: #0f172a;
+  margin-bottom: 8px;
+}
+
+/* ================= Lista de medicamentos ================= */
 .medicines-list {
-  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 10px; 
+  margin: 0.8rem 0;
+  padding: 12px;
+  width: 100%;
+  background: #f9fafb;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.06);
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.medicines-list h3 {
+  margin-bottom: 8px;
+  text-align: left;
+  color: #0f2b68;
 }
 
 .medicines-list ul {
   list-style: none;
   padding: 0;
+  margin: 0;
 }
 
 .medicines-list li {
-  background: #f8fafc;
-  margin-bottom: 8px;
-  padding: 10px;
-  border-radius: 6px;
+  background: #ffffff;
   border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 12px; 
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
 }
 
+.medicine-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px; 
+  margin-bottom: 8px;
+}
+
+.medicine-header strong {
+  font-size: 1.3rem; 
+  color: #0f2b68;
+}
+
+.medicine-header .duration {
+  font-size: 1.1rem; 
+  font-weight: 500;
+  color: #0f2b68;
+}
+
+/* ================= Horários do medicamento ================= */
+.medicines-list li ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.medicines-list li ul li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 3px 0;
+  font-size: 1.1rem; 
+  padding-left: 20px; 
+}
+
+/* ================= Formulário vertical ================= */
+.form-body {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; 
+}
+
+.text-input, select {
+  padding: 10px; 
+  border-radius: 6px;
+  border: 1px solid #cbd5e1;
+  width: 100%;
+  font-size: 1rem; /* fonte menor */
+  text-align: center;
+}
+
+/* Novo medicamento */
+.form-body p strong {
+  display: block;
+  margin-bottom: 6px;
+  color: #0f2b68;
+}
+
+/* Botões */
 .btn {
-  padding: 10px 18px;
+  padding: 12px 20px; 
   border-radius: 8px;
   font-weight: 600;
-  min-width: 120px;
+  min-width: 140px;
+  font-size: 1rem;
   cursor: pointer;
   transition: 0.3s;
 }
@@ -96,11 +167,31 @@
   background-color: #f1f5f9;
 }
 
+.btn-secondary:disabled {
+  background-color: #e5e7eb;
+  color: #9ca3af;
+  cursor: not-allowed;
+  border-color: #d1d5db;
+}
+
+/* ================= Footer ================= */
 .actions-footer {
   display: flex;
   justify-content: center;
   gap: 12px;
   padding-top: 12px;
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
-  margin-top: 1rem;
+  margin-top: 0.8rem;
+}
+/* ================= Cabeçalho ================= */
+.page-header {
+  width: 100%;
+  background-color: #0f2b68;
+  color: white;
+  padding: 16px 0;
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 600;
+  border-radius: 12px 12px 0 0;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  margin-bottom: 16px;
 }

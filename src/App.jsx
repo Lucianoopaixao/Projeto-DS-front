@@ -1,65 +1,56 @@
 import "./App.css";
+import { useState } from "react";
 import Quiz from "./components/Quiz";
 import FollowTreatment from "./components/FollowTreatment";
 import RegisterAppointment from "./components/RegisterAppointment";
-import { useState } from "react";
 import Check from "./components/Check";
 
 export default function App() {
   const [tela, setTela] = useState("Introdução");
   const [documentAccepted, setDocumentAccepted] = useState(false);
 
-  /*Tela explicativa */
+  const renderWrapper = (children) => (
+    <div className="inner-wrapper">{children}</div>
+  );
+
+  // Tela de introdução
   if (tela === "Introdução") {
-    return (
-      <div>
-        <h1>Saúde em Jogo</h1>
-        <p>
-          Bem-vindo(a) ao seu portal de cuidado e informação sobre ISTs.
-          Acreditamos que cuidar da sua saúde sexual é um ato de protagonismo e
-          responsabilidade. Por isso, criamos este espaço seguro e confidencial
-          para que você encontre exatamente o que precisa sobre prevenção,
-          diagnóstico e tratamento de ISTs, no seu tempo e da sua forma, para
-          entender sintomas, avaliar riscos ou receber uma recomendação
-          personalizada sobre testagem, comece pelo Quiz. Se você já está em
-          tratamento ou fez uma consulta recentemente, seu acesso direto para o
-          cuidado é o Acompanhamento do tratamento.
-        </p>
-        <button onClick={() => setTela("Início")}>Continuar</button>
-      </div>
-    );
+    return <div className="intro" onClick={() => setTela("Início")}></div>;
   }
 
-  /*Tela de inicio */
+  // Tela inicial
   if (tela === "Início") {
-    return (
-      <div>
-        <h1 className="linicio">Saúde em Jogo</h1>
-        <button onClick={() => setTela("inicioquiz")}>Quiz sobre ISTs</button>
-        <button onClick={() => setTela("acompanhar")}>
-          Acompanhar tratamento
-        </button>
-      </div>
+    return renderWrapper(
+      <>
+        <h1 className="main-title">Saúde em Jogo</h1>
+        <div className="button-row main-buttons">
+          <button onClick={() => setTela("confirmar-quiz")}>Quiz sobre ISTs</button>
+          <button onClick={() => setTela("acompanhar")}>Acompanhar tratamento</button>
+        </div>
+      </>
     );
   }
 
-  /*Tela de inicio do quiz */
-  if (tela === "inicioquiz") {
-    return (
-      <div>
-        <h1>Saúde em Jogo</h1>
-        <button onClick={() => setTela("quiz")}>Iniciar Quiz</button>
-        <button onClick={() => setTela("Início")}>Voltar</button>
-      </div>
+  // Tela de confirmação antes do quiz
+  if (tela === "confirmar-quiz") {
+    return renderWrapper(
+      <>
+        <h1>Quiz sobre ISTs</h1>
+        <p>Você está prestes a iniciar o Quiz sobre ISTs. Deseja continuar?</p>
+        <div className="button-row">
+          <button onClick={() => setTela("quiz")}>Iniciar</button>
+          <button onClick={() => setTela("Início")}>Voltar</button>
+        </div>
+      </>
     );
   }
 
-  /*quiz em si*/
+  // Quiz
   if (tela === "quiz") {
-    return <Quiz voltarinicio={() => setTela("Início")} />;
+    return <Quiz voltarInicio={() => setTela("Início")} />;
   }
 
-  /*Tela de acompanhamento*/
+  // Acompanhamento
   if (tela === "acompanhar") {
     return (
       <FollowTreatment
@@ -70,12 +61,12 @@ export default function App() {
     );
   }
 
-  /*Tela de registro de consulta*/
+  // Registro de consulta
   if (tela === "registrar-consulta") {
     return <RegisterAppointment onBack={() => setTela("acompanhar")} />;
   }
 
-  /*Tela de check-in*/
+  // Check-in
   if (tela === "check") {
     return (
       <Check
@@ -85,4 +76,6 @@ export default function App() {
       />
     );
   }
+
+  return null;
 }

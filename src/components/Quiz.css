@@ -1,0 +1,79 @@
+/* Container do quiz */
+.quiz-wrapper, .inner-wrapper {
+  max-width: 720px;
+  width: 90%;
+  margin: 40px auto;
+  padding: 30px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.1);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  justify-content: center;
+}
+
+/* Títulos e parágrafos do quiz */
+.quiz-wrapper h1, .inner-wrapper h1 {
+  color: #0f2b68;
+  font-size: 2rem;
+}
+
+.quiz-wrapper p, .inner-wrapper p {
+  font-size: 1.1rem;
+  color: #0f172a;
+}
+
+/* Container das alternativas */
+.alternativas {
+  display: flex;
+  flex-direction: column;
+  gap: 16px; /* espaçamento entre os botões */
+  margin-top: 20px;
+  align-items: center; /* centraliza horizontalmente */
+}
+
+.alternativas button {
+  padding: 14px 20px;
+  font-size: 1.1rem;
+  min-width: 200px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  background-color: #0f2b68;
+  color: white;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.alternativas button:hover {
+  background-color: #173b8b;
+}
+
+/* Botão principal */
+.btn-primary {
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: 0.3s;
+  background-color: #0f2b68;
+  color: white;
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: #173b8b;
+}
+.explicacao {
+  background-color: #e0f0ff; 
+  border-left: 4px solid #0f2b68; 
+  padding: 16px;
+  border-radius: 8px;
+  margin: 20px 0;
+  text-align: left;
+  font-size: 1rem;
+  color: #0f172a;
+}

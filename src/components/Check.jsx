@@ -6,7 +6,7 @@ export default function Check({ onBack, documentAccepted, setDocumentAccepted })
   const [medicines, setMedicines] = useState([]);
   const [newMedicine, setNewMedicine] = useState({ name: "", times: [""], duration: "" });
   const [coins, setCoins] = useState(0);
-  const [takenDoses, setTakenDoses] = useState({});
+  const [takenDoses, setTakenDoses] = useState({}); 
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
@@ -37,10 +37,7 @@ export default function Check({ onBack, documentAccepted, setDocumentAccepted })
       alert("Preencha todos os campos e horários antes de adicionar!");
       return;
     }
-    const medToAdd = {
-      ...newMedicine,
-      duration: parseInt(newMedicine.duration), 
-    };
+    const medToAdd = { ...newMedicine, duration: parseInt(newMedicine.duration) };
     setMedicines([...medicines, medToAdd]);
     setNewMedicine({ name: "", times: [""], duration: "" });
   };
@@ -58,13 +55,11 @@ export default function Check({ onBack, documentAccepted, setDocumentAccepted })
     const allTaken = med.times.every(t => updatedTakenDoses[`${medName}-${t}`]);
 
     if (allTaken) {
-      setMedicines(medicines.map(m =>
-        m.name === medName ? { ...m, duration: m.duration - 1 } : m
-      ));
-
-      const resetDoses = { ...updatedTakenDoses };
-      med.times.forEach(t => delete resetDoses[`${medName}-${t}`]);
-      setTakenDoses(resetDoses);
+      setMedicines(prevMeds =>
+        prevMeds
+          .map(m => m.name === medName ? { ...m, duration: m.duration - 1 } : m)
+          .filter(m => m.duration > 0)
+      );
     }
   };
 
@@ -87,8 +82,10 @@ export default function Check({ onBack, documentAccepted, setDocumentAccepted })
 
   return (
     <div className="form-wrapper">
-      <h1 className="form-title">Cadastro de Medicamentos</h1>
-      <p>Gerencie seus horários e ganhe moedas ao tomar corretamente!</p>
+      {/* Cabeçalho adicionado */}
+      <div className="page-header">Cadastro de Medicamentos</div>
+
+      <h1 className="form-title">Gerencie seus horários e ganhe moedas!</h1>
       <p><strong>Moedas:</strong> {coins} 🪙</p>
 
       {medicines.length > 0 && (
@@ -97,13 +94,16 @@ export default function Check({ onBack, documentAccepted, setDocumentAccepted })
           <ul>
             {medicines.map((med, index) => (
               <li key={index}>
-                <strong>{med.name}</strong> — {med.duration} dias
+                <div className="medicine-header">
+                  <strong>{med.name}</strong>
+                  <span className="duration">{med.duration} dias</span>
+                </div>
                 <ul>
                   {med.times.map((time, i) => {
                     const key = `${med.name}-${time}`;
                     return (
                       <li key={i}>
-                        {time}{" "}
+                        {time}
                         <button
                           className="btn btn-secondary"
                           onClick={() => handleTakeDose(med.name, time)}

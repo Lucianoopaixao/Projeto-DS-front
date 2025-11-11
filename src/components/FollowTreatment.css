@@ -1,3 +1,70 @@
-.pcadastro {
+.follow-treatment-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 600px; 
+  margin: 40px auto;
+  padding: 30px;
+  gap: 24px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.1);
   text-align: center;
+}
+
+.follow-treatment-wrapper h1 {
+  font-size: 2.5rem; 
+  color: #0f2b68;
+  margin-bottom: 20px;
+}
+
+.ft-text {
+  font-size: 1.4rem; 
+  color: #0f172a;
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.ft-buttons {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.btn-primary {
+  padding: 16px 32px;
+  font-size: 1.4rem;
+  min-width: 180px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+  border: none;
+  background-color: #0b1f4d;
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #09183d;
+}
+
+.btn-secondary {
+  padding: 16px 28px;
+  font-size: 1.2rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+  border: 1px solid #cbd5e1;
+  background-color: transparent;
+  color: #0f172a;
+}
+
+.btn-secondary:hover {
+  background-color: #f1f5f9;
+}
+
+.ft-back {
+  margin-top: 1rem;
 }

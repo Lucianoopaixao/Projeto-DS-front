@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect} from "react";
 import Question from "./Question";
 import "./Quiz.css";
 
@@ -10,6 +10,36 @@ export default function Quiz({ voltarInicio }) {
   const [mostrarExplicacao, setMostrarExplicacao] = useState(false);
   const [acertou, setAcertou] = useState(false);
   const [carregando, setCarregando] = useState(true);
+
+  //pegando do back
+  useEffect(() => {
+    fetch("http://localhost:3001/api/quiz")
+    .then((res)=> res.json())
+    .then((data) => {
+      const lista= Array.isArray(data) ? data : [data];
+
+      //transformando as questos  o formato
+      const adaptadas=lista.map((q) => ({
+        pergunta: q.pergunta,
+        alternativas: [
+          q.alternativa_a,
+          q.alternativa_b,
+          q.alternativa_c,
+          q.alternativa_d,
+        ],
+        resposta:q.resposta,
+        explicacaocerta: q.explicacaocerta,
+        explicacaoerrada: q.explicacaoerrada,
+      }));
+      setQuestions(adaptadas);
+      setCarregando(false);
+    })
+    .catch((err) => {//erro
+      console.error("Não buscou o quiz : ", err);
+      setCarregando(false);
+
+    });
+  })
 
   //pegarreposta, qd o usuario escolhe uma resposta
   const pegarreposta= (alternativa)=> {

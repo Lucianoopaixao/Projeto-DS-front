@@ -1,0 +1,62 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model check_in {
+  id               Int      @id @default(autoincrement())
+  usuario_id       Int
+  nome_medicamento String   @db.VarChar(100)
+  duracao_semanas  Int
+  data_inicio      DateTime @default(now()) @db.Date
+  moedaspcadastro  Int      @default(0)
+
+  @@map("check-in")
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model horarios_uso {
+  id         Int                     @id @default(autoincrement())
+  checkin_id Int
+  dia_semana horarios_uso_dia_semana
+  horario    DateTime                @db.Time(0)
+  dose       String?                 @db.VarChar(50)
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model questoes {
+  id               Int    @id @default(autoincrement())
+  pergunta         String @db.VarChar(255)
+  alternativa_a    String @db.VarChar(255)
+  alternativa_b    String @db.VarChar(255)
+  alternativa_c    String @db.VarChar(255)
+  alternativa_d    String @db.VarChar(255)
+  resposta         String @db.VarChar(255)
+  explicacaocerta  String @db.Text
+  explicacaoerrada String @db.Text
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model registro_consulta {
+  id             Int      @id @default(autoincrement())
+  usuario_id     Int
+  data_consulta  DateTime @db.Date
+  anexo_consulta String   @db.VarChar(255)
+  data_registro  DateTime @default(now()) 
+  moedaspanexo   Int      @default(0)
+}
+
+enum horarios_uso_dia_semana {
+  DOMINGO
+  SEGUNDA
+  TERCA
+  QUARTA
+  QUINTA
+  SEXTA
+  SABADO
+  TODOS
+}

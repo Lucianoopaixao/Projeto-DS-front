@@ -1,0 +1,43 @@
+{
+  "name": "projeto-ds-back",
+  "version": "1.0.0",
+  "description": "Backend do projeto Saúde em Jogo",
+  "main": "index.js",
+  "scripts": {
+    "generate": "npx prisma generate",
+    "postinstall": "npm run generate",
+    "start": "node -r dotenv/config index.js",
+    "test": "echo  \"Error : no test specified\" && exit 1",
+    "dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Lucianoopaixao/Projeto-DS-back.git"
+  },
+  "keywords": [
+    "express",
+    "mysql",
+    "backend",
+    "api",
+    "nodejs"
+  ],
+  "author": "Luciano Paixão",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/Lucianoopaixao/Projeto-DS-back/issues"
+  },
+  "homepage": "https://github.com/Lucianoopaixao/Projeto-DS-back#readme",
+  "dependencies": {
+    "@prisma/client": "^6.19.0",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "mysql2": "^3.15.3",
+    "pg": "^8.16.3"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10",
+    "prisma": "^6.19.0"
+  }
+}

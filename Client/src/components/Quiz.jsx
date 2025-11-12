@@ -3,6 +3,7 @@ import Question from "./Question";
 import "./Quiz.css";
 
 export default function Quiz({ voltarInicio }) {
+  //states (atualizar tela)
   const [questions, setQuestions] = useState([]);
   const [indice, setIndice] = useState(0);
   const [pontuacao, setPontuacao] = useState(0);
@@ -41,7 +42,7 @@ export default function Quiz({ voltarInicio }) {
       });
   }, []);
 
-  //pegarreposta, qd o usuario escolhe uma resposta
+  //pegarreposta, qd o usuario escolhe uma resposta, checando se acertou e mostrando explicação
   const pegarReposta = (alternativa) => {
     if (alternativa === questions[indice].resposta) {
       setPontuacao((p) => p + 1);
@@ -71,6 +72,7 @@ export default function Quiz({ voltarInicio }) {
     );
   }
 
+  //caso tenha acabado
   if (fim) {
     return (
       <div className="inner-wrapper">
@@ -86,11 +88,13 @@ export default function Quiz({ voltarInicio }) {
   }
 
   return (
+    //mostrando as moedas
     <div className="inner-wrapper">
       <h1>Quiz sobre ISTs</h1>
       <div>Moedas : {pontuacao} 🪙</div>
 
-      {!mostrarExplicacao ? (
+      {!mostrarExplicacao ? ( // se mostrar explicacao tiver falso, mostra pergunta
+        //se tiver verdadeiro, vai pra tela da explicação
         <Question
           pergunta={questions[indice].pergunta}
           alternativas={questions[indice].alternativas}

@@ -1,4 +1,4 @@
-import { useState, useEffect} from "react";
+import { useState, useEffect } from "react";
 import Question from "./Question";
 import "./Quiz.css";
 
@@ -14,40 +14,39 @@ export default function Quiz({ voltarInicio }) {
   //pegando do back
   useEffect(() => {
     fetch("http://localhost:3001/api/quiz")
-    .then((res)=> res.json())
-    .then((data) => {
-      const lista= Array.isArray(data) ? data : [data];
+      .then((res) => res.json())
+      .then((data) => {
+        const lista = Array.isArray(data) ? data : [data];
 
-      //transformando as questos  o formato
-      const adaptadas=lista.map((q) => ({
-        pergunta: q.pergunta,
-        alternativas: [
-          q.alternativa_a,
-          q.alternativa_b,
-          q.alternativa_c,
-          q.alternativa_d,
-        ],
-        resposta:q.resposta,
-        explicacaocerta: q.explicacaocerta,
-        explicacaoerrada: q.explicacaoerrada,
-      }));
-      setQuestions(adaptadas);
-      setCarregando(false);
-    })
-    .catch((err) => {//erro
-      console.error("Não buscou o quiz : ", err);
-      setCarregando(false);
-
-    });
-  })
+        //transformando as questos  o formato
+        const adaptadas = lista.map((q) => ({
+          pergunta: q.pergunta,
+          alternativas: [
+            q.alternativa_a,
+            q.alternativa_b,
+            q.alternativa_c,
+            q.alternativa_d,
+          ],
+          resposta: q.resposta,
+          explicacaocerta: q.explicacaocerta,
+          explicacaoerrada: q.explicacaoerrada,
+        }));
+        setQuestions(adaptadas);
+        setCarregando(false);
+      })
+      .catch((err) => {
+        //erro
+        console.error("Não buscou o quiz : ", err);
+        setCarregando(false);
+      });
+  }, []);
 
   //pegarreposta, qd o usuario escolhe uma resposta
-  const pegarreposta= (alternativa)=> {
-    if(alternativa===questions[indice].resposta){
-      setPontuacao((p)=> p + 1);
+  const pegarReposta = (alternativa) => {
+    if (alternativa === questions[indice].resposta) {
+      setPontuacao((p) => p + 1);
       setAcertou(true);
-    }
-    else{
+    } else {
       setAcertou(false);
     }
     setMostrarExplicacao(true);
@@ -90,26 +89,28 @@ export default function Quiz({ voltarInicio }) {
     <div className="inner-wrapper">
       <h1>Quiz sobre ISTs</h1>
       <div>Moedas : {pontuacao} 🪙</div>
-    </div>
 
-    {!mostrarExplicacao ? (
-      <Question 
-        pergunta={questions[indice].pergunta}
-        alternativas={questions[indice].alternativas}
-        onResposta={pegarreposta}
+      {!mostrarExplicacao ? (
+        <Question
+          pergunta={questions[indice].pergunta}
+          alternativas={questions[indice].alternativas}
+          onResposta={pegarReposta}
         />
-    ) : (
-      <div>
-        <h2>{acertou? "Parabéns, você acertou!" : "Que pena, você errou."}</h2>
-        <div className="explicacao">
-          {acertou
-          ? questions[indice].explicacaocerta
-          : questions[indice].explicacaoerrada}
+      ) : (
+        <div>
+          <h2>
+            {acertou ? "Parabéns, você acertou!" : "Que pena, você errou."}
+          </h2>
+          <div className="explicacao">
+            {acertou
+              ? questions[indice].explicacaocerta
+              : questions[indice].explicacaoerrada}
+          </div>
+          <button className="btn-primary" onClick={proximaPergunta}>
+            Próxima pergunta
+          </button>
         </div>
-        <button className="btn-primary" onClick={proximaPergunta}>Próxima pergunta</button>
-      </div>
-    )
-
-    )}
+      )}
+    </div>
   );
 }

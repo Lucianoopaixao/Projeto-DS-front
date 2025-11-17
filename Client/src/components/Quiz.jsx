@@ -80,7 +80,7 @@ export default function Quiz({ voltarInicio }) {
         <p>Suas moedas: {pontuacao} 🪙</p>
         <p>Corretas: {pontuacao}</p>
         <p>Erradas: {questions.length - pontuacao}</p>
-        <button className="btn-secondary" onClick={voltarInicio}>
+        <button className="btn-fim-quiz" onClick={voltarInicio}>
           Voltar ao início
         </button>
       </div>
@@ -110,7 +110,7 @@ export default function Quiz({ voltarInicio }) {
               ? questions[indice].explicacaocerta
               : questions[indice].explicacaoerrada}
           </div>
-          <button className="btn-primary" onClick={proximaPergunta}>
+          <button className="btn-quiz" onClick={proximaPergunta}>
             Próxima pergunta
           </button>
         </div>

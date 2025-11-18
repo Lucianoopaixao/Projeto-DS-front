@@ -66,7 +66,7 @@ export default function Quiz({ voltarInicio }) {
   //estados do carregamento
   if (carregando) {
     return (
-      <div className="inner-wrapper">
+      <div className="quiz-inner-wrapper">
         <h2>Carregando Perguntas...</h2>
       </div>
     );
@@ -75,11 +75,25 @@ export default function Quiz({ voltarInicio }) {
   //caso tenha acabado
   if (fim) {
     return (
-      <div className="inner-wrapper">
+      <div className="quiz-inner-wrapper container-resultado">
         <h1>Fim do Quiz!</h1>
-        <p>Suas moedas: {pontuacao} 🪙</p>
-        <p>Corretas: {pontuacao}</p>
-        <p>Erradas: {questions.length - pontuacao}</p>
+        <div className="destaque-pontuacao">
+          <p>Suas moedas</p>
+          <span className="exibir-moedas"> {pontuacao} 🪙</span>
+        </div>
+
+        <div className="acertos-erros">
+          <div className="stat-box correto">
+            <span className="stat-label">Corretas</span>
+            <span className="stat-valor">{pontuacao}</span>
+          </div>
+          <div className="stat-box errado">
+            <span className="stat-label">Erradas</span>
+            <span className="stat-valor">{questions.length - pontuacao}</span>
+          </div>
+
+        </div>
+
         <button className="btn-fim-quiz" onClick={voltarInicio}>
           Voltar ao início
         </button>
@@ -89,7 +103,7 @@ export default function Quiz({ voltarInicio }) {
 
   return (
     //mostrando as moedas
-    <div className="inner-wrapper">
+    <div className="quiz-inner-wrapper">
       <h1>Quiz sobre ISTs</h1>
       <div>Moedas : {pontuacao} 🪙</div>
 

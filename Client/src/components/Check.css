@@ -6,11 +6,11 @@ html, body, #root {
   min-height: 100vh;
   font-family: "Poppins", "Segoe UI", sans-serif;
   color: #0f172a;
-  background-image: url('../imagens/fundo-comum.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   overflow-y: auto;
+  background: linear-gradient(135deg, #f0f4fd 0%, #e2eafc 100%);
 }
 
 /* ================= Bloco principal ================= */

@@ -36,15 +36,14 @@ export default function RegisterAppointment({ onBack }) {
           </div>
         )}
 
-        <button type="button" className="btn btn-primary" onClick={handleSubmit}>
+        <button className= "btn-primary" onClick={handleSubmit}>
           Enviar Comprovante
         </button>
       </div>
+      <hr className="divisor-fino" />
 
       <div className="actions-footer">
-        <button type="button" className="btn btn-secondary" onClick={onBack}>
-          Voltar
-        </button>
+        <button className="btn-secondary" onClick={onBack}> Voltar </button>
       </div>
     </div>
   );

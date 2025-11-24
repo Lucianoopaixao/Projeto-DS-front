@@ -1,6 +1,5 @@
 import checkInModel from "../models/checkInModel.js"; 
 
-// Função auxiliar (Fica aqui pois é tratamento de dados, não banco)
 function stringParaData(horarioString) {
   const [horas, minutos] = horarioString.split(':');
   const data = new Date();
@@ -14,7 +13,7 @@ async function criarMedicamento(req, res) {
   try {
     const { nome, duracao, horarios } = req.body;
 
-    // Validação básica
+  
     if (!nome || !horarios || horarios.length === 0) {
       return res.status(400).json({ error: "Dados incompletos" });
     }
@@ -38,7 +37,6 @@ async function criarMedicamento(req, res) {
     };
 
     // 2. CHAMAR O MODEL
-    // Agora é o Model que toca no banco, não mais o controller direto
     const novoCheckIn = await checkInModel.criarCheckIn(dadosParaSalvar);
 
     return res.status(201).json(novoCheckIn);

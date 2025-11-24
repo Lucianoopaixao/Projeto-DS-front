@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import quizRoutes from "./routes/quizRoutes.js";
+import consultaRoutes from "./routes/consultaRoutes.js";
 
 //crinando a aplicação express
 const app = express();
@@ -10,6 +11,7 @@ app.use(express.json());
 //pegando a rota
 app.use("/api/quiz", quizRoutes);
 app.use("/api/checkin", checkInRoutes);
+app.use("/api/consultas", consultaRoutes);
 
 const PORT = 3001;
 app.listen(PORT, () => console.log(`Servidor rodando em ${PORT}`));

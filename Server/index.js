@@ -9,6 +9,7 @@ app.use(express.json());
 
 //pegando a rota
 app.use("/api/quiz", quizRoutes);
+app.use("/api/checkin", checkInRoutes);
 
 const PORT = 3001;
 app.listen(PORT, () => console.log(`Servidor rodando em ${PORT}`));

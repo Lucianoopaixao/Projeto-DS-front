@@ -1,7 +1,6 @@
-import { PrismaClient } from "@prisma/client";
-const prisma = new PrismaClient();
+import checkInModel from "../models/checkInModel.js"; 
 
-// Função auxiliar para converter string "HH:MM" para objeto Date (exigência do Prisma @db.Time)
+// Função auxiliar (Fica aqui pois é tratamento de dados, não banco)
 function stringParaData(horarioString) {
   const [horas, minutos] = horarioString.split(':');
   const data = new Date();
@@ -13,33 +12,34 @@ function stringParaData(horarioString) {
 
 async function criarMedicamento(req, res) {
   try {
-    // O front envia: { nome: "Dipirona", duracao: "2", horarios: ["08:00", "20:00"] }
     const { nome, duracao, horarios } = req.body;
 
+    // Validação básica
     if (!nome || !horarios || horarios.length === 0) {
       return res.status(400).json({ error: "Dados incompletos" });
     }
 
-    const novoCheckIn = await prisma.check_in.create({
-      data: {
-        usuario_id: 1, // Hardcoded por enquanto
-        nome_medicamento: nome,
-        duracao_semanas: parseInt(duracao),
-        moedaspcadastro: 5,
-        
-        // Graças à alteração que fizemos no schema, isso agora funciona:
-        horarios: {
-          create: horarios.map((horaString) => ({
-            dia_semana: "TODOS", // Deve bater com o ENUM do banco
-            horario: stringParaData(horaString), // Converte string para Date
-            dose: "1 dose"
-          }))
-        }
-      },
-      include: {
-        horarios: true // Retorna já com os horários criados
+    // 1. PREPARAR O OBJETO PARA O PRISMA
+    // O controller arruma os dados antes de mandar pro Model
+    const dadosParaSalvar = {
+      usuario_id: 1, 
+      nome_medicamento: nome,
+      duracao_semanas: parseInt(duracao),
+      moedaspcadastro: 5,
+      
+      // Transforma o array de strings ["08:00"] no formato do Prisma
+      horarios: {
+        create: horarios.map((horaString) => ({
+          dia_semana: "TODOS",
+          horario: stringParaData(horaString),
+          dose: "1 dose"
+        }))
       }
-    });
+    };
+
+    // 2. CHAMAR O MODEL
+    // Agora é o Model que toca no banco, não mais o controller direto
+    const novoCheckIn = await checkInModel.criarCheckIn(dadosParaSalvar);
 
     return res.status(201).json(novoCheckIn);
 
@@ -51,14 +51,8 @@ async function criarMedicamento(req, res) {
 
 async function listarMedicamentos(req, res) {
   try {
-    const lista = await prisma.check_in.findMany({
-      include: {
-        horarios: true // Traz os horários juntos
-      },
-      orderBy: {
-        id: 'desc'
-      }
-    });
+    // Chama o Model para buscar a lista
+    const lista = await checkInModel.listarCheckIns();
     return res.status(200).json(lista);
   } catch (error) {
     console.error(error);

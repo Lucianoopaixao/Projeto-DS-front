@@ -32,15 +32,44 @@ export default function Check({ onBack, documentAccepted, setDocumentAccepted })
     setNewMedicine({ ...newMedicine, times: updatedTimes });
   };
 
-  const handleAddMedicine = () => {
+  // --- AQUI ESTÁ A MUDANÇA: Conexão com o Banco de Dados ---
+  const handleAddMedicine = async () => {
+    // 1. Validação (Igual ao original)
     if (!newMedicine.name || !newMedicine.duration || newMedicine.times.some(t => !t)) {
-      alert("Preencha todos os campos e horÃ¡rios antes de adicionar!");
+      alert("Preencha todos os campos e horários antes de adicionar!");
       return;
     }
-    const medToAdd = { ...newMedicine, duration: parseInt(newMedicine.duration) };
-    setMedicines([...medicines, medToAdd]);
-    setNewMedicine({ name: "", times: [""], duration: "" });
+
+    // 2. Preparar dados para enviar ao Backend
+    const dadosParaEnviar = {
+        nome: newMedicine.name,
+        duracao: newMedicine.duration,
+        horarios: newMedicine.times
+    };
+
+    try {
+        // 3. Enviando para o servidor...
+        const response = await fetch("http://localhost:3001/api/checkin", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(dadosParaEnviar)
+        });
+
+        if (response.ok) {
+            // 4. Se o servidor aceitou, atualiza a tela (Código original)
+            const medToAdd = { ...newMedicine, duration: parseInt(newMedicine.duration) };
+            setMedicines([...medicines, medToAdd]);
+            setNewMedicine({ name: "", times: [""], duration: "" });
+            alert("Medicamento salvo no Banco de Dados com sucesso!"); 
+        } else {
+            alert("Erro ao salvar. Verifique se o servidor backend está rodando.");
+        }
+    } catch (error) {
+        console.error("Erro:", error);
+        alert("Erro de conexão com o servidor.");
+    }
   };
+  // ---------------------------------------------------------
 
   const handleTakeDose = (medName, time) => {
     const key = `${medName}-${time}`;
@@ -49,17 +78,18 @@ export default function Check({ onBack, documentAccepted, setDocumentAccepted })
     const updatedTakenDoses = { ...takenDoses, [key]: true };
     setTakenDoses(updatedTakenDoses);
     setCoins(coins + 1);
-    alert(`Dose de ${medName} (${time}) confirmada! +1 moeda ðŸª™`);
+    alert(`Dose de ${medName} (${time}) confirmada! +1 moeda ??`);
 
     const med = medicines.find(m => m.name === medName);
-    const allTaken = med.times.every(t => updatedTakenDoses[`${medName}-${t}`]);
-
-    if (allTaken) {
-      setMedicines(prevMeds =>
-        prevMeds
-          .map(m => m.name === medName ? { ...m, duration: m.duration - 1 } : m)
-          .filter(m => m.duration > 0)
-      );
+    if (med) {
+        const allTaken = med.times.every(t => updatedTakenDoses[`${medName}-${t}`]);
+        if (allTaken) {
+            setMedicines(prevMeds =>
+                prevMeds
+                .map(m => m.name === medName ? { ...m, duration: m.duration - 1 } : m)
+                .filter(m => m.duration > 0)
+            );
+        }
     }
   };
 
@@ -67,7 +97,7 @@ export default function Check({ onBack, documentAccepted, setDocumentAccepted })
     return (
       <div className="form-wrapper">
         <h1 className="form-title">Check-in de Tratamento</h1>
-        <p>Envie o documento de comprovaÃ§Ã£o para continuar:</p>
+        <p>Envie o documento de comprovação para continuar:</p>
         <div className="upload-section">
           <input type="file" accept="image/*,.pdf" onChange={handleFileChange} className="file-input" />
           {selectedFile && <div className="selected-file"><p>Arquivo selecionado: {selectedFile.name}</p></div>}
@@ -82,11 +112,10 @@ export default function Check({ onBack, documentAccepted, setDocumentAccepted })
 
   return (
     <div className="form-wrapper">
-      {/* CabeÃ§alho adicionado */}
       <div className="page-header">Cadastro de Medicamentos</div>
 
-      <h1 className="form-title">Gerencie seus horÃ¡rios e ganhe moedas!</h1>
-      <p><strong>Moedas:</strong> {coins} ðŸª™</p>
+      <h1 className="form-title">Gerencie seus horários e ganhe moedas!</h1>
+      <p><strong>Moedas:</strong> {coins} ??</p>
 
       {medicines.length > 0 && (
         <div className="medicines-list">
@@ -139,10 +168,10 @@ export default function Check({ onBack, documentAccepted, setDocumentAccepted })
             className="text-input"
           />
         ))}
-        <button className="btn btn-secondary" onClick={handleAddTime}>+ Adicionar outro horÃ¡rio</button>
+        <button className="btn btn-secondary" onClick={handleAddTime}>+ Adicionar outro horário</button>
         <input
           type="text"
-          placeholder="DuraÃ§Ã£o (em dias)"
+          placeholder="Duração (em dias)"
           value={newMedicine.duration}
           onChange={(e) => setNewMedicine({ ...newMedicine, duration: e.target.value })}
           className="text-input"

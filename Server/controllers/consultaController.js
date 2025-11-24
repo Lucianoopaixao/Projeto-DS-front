@@ -18,4 +18,5 @@ async function listar(req, res) {
   }
 }
 
-export default { cadastrar, listar };
+export { cadastrar as registrarConsulta, listar };
+

@@ -4,18 +4,16 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url      = "postgresql://neondb_owner:npg_riXTt5bO0uPq@ep-raspy-tree-ahdlx711-pooler.c-3.us-east-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require"
 }
 
 model check_in {
-  id               Int      @id @default(autoincrement()) // ➜ faltava ID
+  id               Int      @id @default(autoincrement())
   usuario_id       Int
   nome_medicamento String   @db.VarChar(100)
   duracao_semanas  Int
   data_inicio      DateTime @default(now()) @db.Date
   moedaspcadastro  Int      @default(0)
-
-  horarios horarios_uso[] // ➜ relação adicionada
 
   @@map("check-in")
 }
@@ -24,13 +22,10 @@ model horarios_uso {
   id         Int                     @id @default(autoincrement())
   checkin_id Int
   dia_semana horarios_uso_dia_semana
-  horario    String                  @db.VarChar(10)   
+  horario    String                @db.Time(0)
   dose       String?                 @db.VarChar(50)
-
-  checkin check_in @relation(fields: [checkin_id], references: [id])
 }
 
-/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
 model questoes {
   id               Int    @id @default(autoincrement())
   pergunta         String @db.VarChar(255)
@@ -39,11 +34,10 @@ model questoes {
   alternativa_c    String @db.VarChar(255)
   alternativa_d    String @db.VarChar(255)
   resposta         String @db.VarChar(255)
-  explicacaocerta  String @db.Text
-  explicacaoerrada String @db.Text
+  explicacaocerta  String
+  explicacaoerrada String
 }
 
-/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
 model registro_consulta {
   id             Int      @id @default(autoincrement())
   usuario_id     Int

@@ -1,79 +1,169 @@
 /* Container do quiz */
-.quiz-wrapper, .inner-wrapper {
+.quiz-inner-wrapper {
   max-width: 720px;
   width: 90%;
-  margin: 40px auto;
-  padding: 30px;
+  margin: 50px auto;
+  padding: 40px;
   background: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.1);
+  border-radius: 16px;
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.08);
   text-align: center;
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 28px;
   justify-content: center;
 }
 
 /* Títulos e parágrafos do quiz */
-.quiz-wrapper h1, .inner-wrapper h1 {
-  color: #0f2b68;
-  font-size: 2rem;
+.quiz-inner-wrapper h1 {
+  color: #0d47a1;
+  font-size: 2.2rem;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  margin: 0;
 }
 
-.quiz-wrapper p, .inner-wrapper p {
-  font-size: 1.1rem;
-  color: #0f172a;
+.quiz-inner-wrapper p {
+  font-size: 1.15rem;
+  color: #1e293b;
+  line-height: 1.5;
+  margin-top: -10px;
 }
 
 /* Container das alternativas */
 .alternativas {
   display: flex;
   flex-direction: column;
-  gap: 16px; /* espaçamento entre os botões */
-  margin-top: 20px;
+  gap: 18px; /* espaçamento entre os botões */
+  margin-top: 10px;
   align-items: center; /* centraliza horizontalmente */
 }
 
 .alternativas button {
-  padding: 14px 20px;
-  font-size: 1.1rem;
-  min-width: 200px;
-  border-radius: 8px;
+  width: 100%;
+  max-width: 420px;
+
+  padding: 16px 22px;
+  font-size: 1.15rem;
+  border-radius: 12px;
   border: none;
   cursor: pointer;
-  background-color: #0f2b68;
+  background-color: #1976d2;
   color: white;
   font-weight: 600;
-  transition: 0.3s;
+  transition: 0.25s ease;
 }
 
 .alternativas button:hover {
-  background-color: #173b8b;
+  background-color: #0d47a1;
+  transform: translateY(-2px);
 }
 
 /* Botão principal */
-.btn-primary {
-  padding: 12px 20px;
-  border-radius: 8px;
+.btn-quiz {
+  padding: 14px 24px;
+  border-radius: 12px;
   font-weight: 600;
-  font-size: 1rem;
+  font-size: 1.1rem;
   cursor: pointer;
-  transition: 0.3s;
-  background-color: #0f2b68;
+  transition: 0.25s ease;
+  background-color: #1976d2;
   color: white;
   border: none;
 }
 
-.btn-primary:hover {
-  background-color: #173b8b;
+.btn-quiz:hover {
+  background-color: #0d47a1;
+  transform: translateY(-2px);
 }
 .explicacao {
-  background-color: #e0f0ff; 
-  border-left: 4px solid #0f2b68; 
-  padding: 16px;
-  border-radius: 8px;
-  margin: 20px 0;
+  background-color: #e3f2fd;
+  border-left: 5px solid #1976d2;
+  padding: 18px 20px;
+  border-radius: 12px;
+  margin: 25px 0;
   text-align: left;
-  font-size: 1rem;
+  font-size: 1.05rem;
   color: #0f172a;
+  line-height: 1.5;
 }
+
+.btn-fim-quiz {
+  padding: 14px 28px;
+  border-radius: 16px;
+  background-color: #1976d2;
+  color: white;
+  font-size: 1.2rem;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+.btn-fim-quiz:hover {
+  background-color: #0d47a1;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.container-resultado {
+  gap: 35px;
+  padding-bottom: 50px;
+}
+
+.destaque-pontuacao {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.destaque-pontuacao p {
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #64748b;
+  margin: 0;
+  font-weight: 600;
+}
+
+.exibir-moedas {
+  font-size: 3rem;
+  font-weight: 800;
+  color: #d97706;
+  text-shadow: 0 2px 10px rgba(217, 119, 6, 0.2);
+}
+
+.acertos-erros {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.stat-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 120px;
+  padding: 15px;
+  border-radius: 16px;
+  background-color: #f8fafc;
+  border: 2px solid transparent;
+  transition: transform 0.2s ease;
+}
+
+.stat-box:hover {
+  transform: translateY(-3px);
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #64748b;
+  margin-bottom: 5px;
+}
+

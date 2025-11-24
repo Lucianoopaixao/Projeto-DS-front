@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import quizRoutes from "./routes/quizRoutes.js";
 import consultaRoutes from "./routes/consultaRoutes.js";
+import checkInRoutes from "./routes/checkInRoutes.js";
 
 //crinando a aplicação express
 const app = express();

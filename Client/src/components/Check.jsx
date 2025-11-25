@@ -34,9 +34,9 @@ export default function Check({ onBack, documentAccepted, setDocumentAccepted })
 
  
    const handleAddMedicine = async () => {
-    // 1. Validação básica (igual ao seu)
+    // 1. Validaï¿½ï¿½o bï¿½sica (igual ao seu)
     if (!newMedicine.name || !newMedicine.duration || newMedicine.times.some(t => !t)) {
-      alert("Preencha todos os campos e horários antes de adicionar!");
+      alert("Preencha todos os campos e horï¿½rios antes de adicionar!");
       return;
     }
 
@@ -65,14 +65,14 @@ export default function Check({ onBack, documentAccepted, setDocumentAccepted })
             const erroDoServidor = await response.json();
             console.error("Erro detalhado:", erroDoServidor);
             
-            // O alerta vai mostrar exatamente O QUE está errado
+            // O alerta vai mostrar exatamente O QUE estï¿½ errado
             alert(`O Servidor recusou: ${erroDoServidor.error || JSON.stringify(erroDoServidor)}`);
         }
         
 
     } catch (error) {
         console.error("Erro:", error);
-        alert("Erro de conexão com o servidor. Verifique o terminal do VS Code.");
+        alert("Erro de conexï¿½o com o servidor. Verifique o terminal do VS Code.");
     }
   };
 

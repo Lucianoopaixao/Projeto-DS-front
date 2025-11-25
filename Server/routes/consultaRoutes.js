@@ -5,4 +5,6 @@ const router = express.Router();
 
 router.post("/registrar-consulta", registrarConsulta);
 
+router.get("/", listar);
+
 export default router;

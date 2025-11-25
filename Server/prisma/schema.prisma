@@ -7,30 +7,32 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+//CHECK-IN
 model check_in {
-  id               Int      @id @default(autoincrement()) // ➜ faltava ID
-  usuario_id       Int
+  id               Int      @id @default(autoincrement())
+  usuario_id       Int      @default(1)
   nome_medicamento String   @db.VarChar(100)
   duracao_semanas  Int
   data_inicio      DateTime @default(now()) @db.Date
   moedaspcadastro  Int      @default(0)
-
-  horarios horarios_uso[] // ➜ relação adicionada
-
-  @@map("check-in")
+  horarios         horarios_uso[]
+  @@map("check_in")
 }
 
 model horarios_uso {
-  id         Int                     @id @default(autoincrement())
-  checkin_id Int
-  dia_semana horarios_uso_dia_semana
-  horario    String                  @db.VarChar(10)   
-  dose       String?                 @db.VarChar(50)
-
-  checkin check_in @relation(fields: [checkin_id], references: [id])
+  id          Int      @id @default(autoincrement())
+  checkin_id  Int
+  checkin     check_in @relation(fields: [checkin_id], references: [id])
+  
+  dia_semana  horarios_uso_dia_semana
+  
+  // VOLTAMOS PARA DATA/HORA (Isso salva seus dados!)
+  horario     DateTime @db.Time(0) 
+  
+  dose        String?  @db.VarChar(50)
 }
 
-/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+//QUIZ
 model questoes {
   id               Int    @id @default(autoincrement())
   pergunta         String @db.VarChar(255)
@@ -39,11 +41,11 @@ model questoes {
   alternativa_c    String @db.VarChar(255)
   alternativa_d    String @db.VarChar(255)
   resposta         String @db.VarChar(255)
-  explicacaocerta  String @db.Text
-  explicacaoerrada String @db.Text
+  explicacaocerta  String
+  explicacaoerrada String
 }
 
-/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+//CONSULTAS
 model registro_consulta {
   id             Int      @id @default(autoincrement())
   usuario_id     Int

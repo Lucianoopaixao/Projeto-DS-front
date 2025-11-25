@@ -33,9 +33,10 @@ export default function Check({ onBack, documentAccepted, setDocumentAccepted })
   };
 
  
-  const handleAddMedicine = async () => {
+   const handleAddMedicine = async () => {
+    // 1. ValidaÁ„o b·sica (igual ao seu)
     if (!newMedicine.name || !newMedicine.duration || newMedicine.times.some(t => !t)) {
-      alert("Preencha todos os campos e hor√°rios antes de adicionar!");
+      alert("Preencha todos os campos e hor·rios antes de adicionar!");
       return;
     }
 
@@ -53,19 +54,25 @@ export default function Check({ onBack, documentAccepted, setDocumentAccepted })
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(dadosParaEnviar)
         });
-
         if (response.ok) {
-            // 4. Se o servidor aceitou, atualiza a tela 
+            // Sucesso: Atualiza a tela
             const medToAdd = { ...newMedicine, duration: parseInt(newMedicine.duration) };
             setMedicines([...medicines, medToAdd]);
             setNewMedicine({ name: "", times: [""], duration: "" });
-            alert("Medicamento salvo no Banco de Dados com sucesso!"); 
+            alert("Medicamento salvo com sucesso!"); 
         } else {
-            alert("Erro ao salvar. Verifique se o servidor backend est√° rodando.");
+            // Erro: Vamos ler o motivo que o servidor mandou
+            const erroDoServidor = await response.json();
+            console.error("Erro detalhado:", erroDoServidor);
+            
+            // O alerta vai mostrar exatamente O QUE est· errado
+            alert(`O Servidor recusou: ${erroDoServidor.error || JSON.stringify(erroDoServidor)}`);
         }
+        
+
     } catch (error) {
         console.error("Erro:", error);
-        alert("Erro de conex√£o com o servidor.");
+        alert("Erro de conex„o com o servidor. Verifique o terminal do VS Code.");
     }
   };
 

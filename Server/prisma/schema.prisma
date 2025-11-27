@@ -10,7 +10,8 @@ datasource db {
 //CHECK-IN
 model check_in {
   id               Int      @id @default(autoincrement())
-  usuario_id       Int      @default(1)
+  usuario_id       Int
+  user             User      @relation(fields: [usuario_id], references: [id])
   nome_medicamento String   @db.VarChar(100)
   duracao_semanas  Int
   data_inicio      DateTime @default(now()) @db.Date
@@ -49,6 +50,7 @@ model questoes {
 model registro_consulta {
   id             Int      @id @default(autoincrement())
   usuario_id     Int
+  user           User     @relation(fields: [usuario_id], references: [id])
   data_consulta  DateTime @db.Date
   anexo_consulta String   @db.VarChar(255)
   data_registro  DateTime @default(now())
@@ -64,4 +66,18 @@ enum horarios_uso_dia_semana {
   SEXTA
   SABADO
   TODOS
+}
+
+//USER
+
+model User {
+  id             Int      @id @default(autoincrement())
+  externalId     String   @unique @map("external_id")
+  name           String?
+  email          String?
+
+  check_ins      check_in[] 
+  registros_consulta  registro_consulta[]
+
+  @@map ("users")
 }

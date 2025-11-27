@@ -73,6 +73,7 @@ enum horarios_uso_dia_semana {
 model User {
   id             Int      @id @default(autoincrement())
   externalId     String   @unique @map("external_id")
+  document       String?  @unique
   name           String?
   email          String?
 

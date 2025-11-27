@@ -11,7 +11,6 @@ const clientId = "app-recife"; //cliente fixo app recife
 export const login = async (req, res) => {
   const { username, password } = req.body; //pegando os dados do front
 
-  // NUNCA logar senha em produção; aqui é só debug temporário:
   const maskedPassword = password ? password.replace(/./g, "*") : ""; //transformar senha em secre
 
   console.log(
@@ -55,6 +54,7 @@ export const login = async (req, res) => {
     const externalId = self.document;
     const name = self.name;
     const email = self.email;
+    const document = self.document;
 
     if (!externalId) {
       console.error(
@@ -68,8 +68,8 @@ export const login = async (req, res) => {
 
     const localUser = await prisma.user.upsert({
       where: { externalId },
-      update: { name, email },
-      create: { externalId, name, email },
+      update: { name, email, document },
+      create: { externalId, name, email, document },
     });
 
     return res

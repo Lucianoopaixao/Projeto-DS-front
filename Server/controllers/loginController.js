@@ -1,78 +1,88 @@
-//axios pras requisicoes
+import "dotenv/config";
 import axios from "axios";
 import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
+import { URLSearchParams } from "url";
 
-//url da api da prefeitura(tanto a que pega o token quanto a do servidor api pra dados)
 const AUTHO_URL = process.env.AUTHO_BASE_URL;
 const API_URL = process.env.API_CONECTA_BASE_URL;
-
-//funcao do login em cin
+const clientId = "app-recife"; //cliente fixo app recife
 
 export const login = async (req, res) => {
-  const { username, password } = req.body;
-  const clientId = "app-recife";
+  const { username, password } = req.body; //pegando os dados do front
 
-  //try da autorizacao pra emissao token
+  // NUNCA logar senha em produção; aqui é só debug temporário:
+  const maskedPassword = password ? password.replace(/./g, "*") : ""; //transformar senha em secre
+
+  console.log(
+    `Tentativa de login com credenciais username=${username} password=${maskedPassword}` //mensagem de tentativa de login
+  );
+
   try {
-    const authResponse = await axios.post(
-      `${AUTHO_URL}/protocol/openid-connect/token`,
-      //agora os dados pra autenticar
-      new URLSearchParams({
-        grant_type: "password",
-        client_id: clientId,
-        username: username,
-        password: password,
-      }).toString(), //enviar como codigo
-      {
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
-      }
+    const params = new URLSearchParams({
+      //corpo da requisicao
+      grant_type: "password",
+      client_id: clientId,
+      username,
+      password,
+    });
+
+    console.log(
+      "Codigo da tentativa de login:",
+      params.toString().slice(0, 200)
     );
 
-    //depois da tentativa, em teoria, retorna o token
+    const tokenUrl = `${AUTHO_URL}/protocol/openid-connect/token`; //pegando o tolken
+    const authResponse = await axios.post(tokenUrl, params.toString(), {
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      timeout: 10000, //requisicao do token com tempo limite
+    });
 
-    const externalToken = authResponse.data.access_token;
+    const externalToken = authResponse.data.access_token; //token recebido!
+    if (!externalToken) {
+      console.error("Nenhum token retornado:", authResponse.data); //n retornou nenum token
+      return res.status(500).json({ message: "Token não retornado" });
+    }
 
-    //usando o token pra buscar infos do user
+    //Obtendo as informacoes atraves do toki
     const selfResponse = await axios.get(`${API_URL}/api/self`, {
       headers: { Authorization: `Bearer ${externalToken}` },
     });
 
-    //infos do user
+    //Banco de dados prisma
+    const self = selfResponse.data;
 
-    const { login, name, email } = selfResponse.data;
+    const externalId = self.document;
+    const name = self.name;
+    const email = self.email;
 
-    //BANCO DE DADOS PRISMA LOCAL
+    if (!externalId) {
+      console.error(
+        "ERRO: Nenhum identificador único encontrado no self:",
+        self
+      );
+      return res
+        .status(500)
+        .json({ message: "Não foi possível identificar o usuário" });
+    }
 
     const localUser = await prisma.user.upsert({
-      where: { externalId: login },
-      update: {
-        name: name, //atualizacao do nome
-        email: email,
-      },
-      create: {
-        externalId: login,
-        name: name,
-        email: email,
-      },
+      where: { externalId },
+      update: { name, email },
+      create: { externalId, name, email },
     });
 
-    //resposta pro front
-
-    return res.status(200).json({
-      token: externalToken, //token api
-      userId: localUser.id, //id
-      message: "Login bem-sucedido!",
-    });
+    return res
+      .status(200)
+      .json({ token: externalToken, message: "Login bem-sucedido" }); //deu tudo certo
   } catch (error) {
-    //se der erro..
     const status = error.response?.status || 500;
     const errorMessage =
-      error.response?.data?.detail || "Falha na realização do login";
+      error.response?.data?.error_description ||
+      error.response?.data?.detail ||
+      error.message ||
+      "Falha na realização do login"; //deu tudo errado
 
-    console.error("Erro durante login: ", errorMessage);
     return res.status(status).json({ message: errorMessage });
   }
 };

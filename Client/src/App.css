@@ -24,7 +24,7 @@ html, body, #root {
 /* Wrapper branco centralizado */
 .inner-wrapper {
   width: 90%;
-  max-width: 720px;
+  max-width: 600px;
   min-height: 400px;
   padding: 30px;
   background-color: #ffffff;
@@ -39,13 +39,13 @@ html, body, #root {
 
 /* Títulos */
 h1 {
-  font-size: 2rem;
+  font-size: 2.4rem !important;
   color: #0f2b68;
   margin-bottom: 16px;
 }
 
 p {
-  font-size: 1.2rem;
+  font-size: 1.2rem !important;
   color: #0f172a;
 }
 
@@ -67,23 +67,15 @@ button:hover {
   background: linear-gradient(90deg, #003366 0%, #004d99 100%);
 }
 
-/* Botões secundários */
-.btn-secondary {
-  padding: 14px 24px;
-  border: 1px solid #cbd5e1;
-  background-color: transparent;
-  color: #0f172a;
-}
-
 .btn-secondary:hover {
-  background-color: #f1f5f9;
+  background: rgb(155, 155, 155);
 }
 
 /* Linhas de botões */
 .button-row, .ft-buttons {
   display: flex;
   justify-content: center;
-  gap: 16px;
+  gap: 45px;
   flex-wrap: wrap;
 }
 
@@ -95,9 +87,10 @@ button:hover {
 /* Upload */
 .upload-section {
   border: 2px dashed #cbd5e1;
-  border-radius: 8px;
+  border-radius: 10px;
   padding: 20px;
   text-align: center;
+  justify-content: center;
   background-color: #f9fafb;
 }
 
@@ -114,6 +107,7 @@ button:hover {
 }
 
 .selected-file {
+  text-align: center !important;
   margin: 1rem 0;
   padding: 8px;
   background-color: #f3f4f6;
@@ -123,10 +117,11 @@ button:hover {
 
 /* Footer de ações */
 .actions-footer {
+  padding: 10px 20px;
+  font-size: 1.2rem !important;
   display: flex;
   justify-content: center;
   gap: 12px;
-  padding-top: 12px;
   border-top: 1px solid rgba(0,0,0,0.06);
   position: sticky;
   bottom: 0;

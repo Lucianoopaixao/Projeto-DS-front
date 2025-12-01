@@ -1,0 +1,105 @@
+/* Fundo azul cobrindo a tela toda */
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #004aad; /* Azul do Conecta Recife / Saúde em Jogo */
+  padding: 20px;
+}
+
+/* O cartão branco centralizado */
+.login-box {
+  background-color: white;
+  padding: 2.5rem;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+
+/* Título */
+.login-box h2 {
+  color: #004aad;
+  margin-bottom: 10px;
+  font-size: 1.8rem;
+}
+
+/* Subtítulo */
+.subtitle {
+  color: #666;
+  margin-bottom: 2rem;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+/* Grupos de Input (Label + Campo) */
+.input-group {
+  margin-bottom: 1.5rem;
+  text-align: left;
+}
+
+.input-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+  color: #333;
+  font-size: 0.9rem;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+/* Efeito ao clicar no input */
+.input-group input:focus {
+  border-color: #004aad;
+  box-shadow: 0 0 0 3px rgba(0, 74, 173, 0.1);
+}
+
+/* Botão de Entrar */
+.btn-login {
+  width: 100%;
+  padding: 14px;
+  background-color: #004aad;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.1s;
+  margin-top: 10px;
+}
+
+.btn-login:hover {
+  background-color: #003380;
+}
+
+.btn-login:active {
+  transform: scale(0.98);
+}
+
+.btn-login:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+/* Mensagem de erro (vermelha) */
+.error-message {
+  color: #721c24;
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 1.5rem;
+  font-size: 0.9rem;
+  text-align: left;
+}

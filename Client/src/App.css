@@ -1,5 +1,7 @@
 /* Reset e CSS global */
-html, body, #root {
+html,
+body,
+#root {
   margin: 0;
   padding: 0;
   width: 100%;
@@ -39,9 +41,10 @@ html, body, #root {
 
 /* Títulos */
 h1 {
-  font-size: 2.4rem !important;
+  font-size: 2.8rem !important;
   color: #0f2b68;
   margin-bottom: 16px;
+  padding-top: 80px;
 }
 
 p {
@@ -72,11 +75,13 @@ button:hover {
 }
 
 /* Linhas de botões */
-.button-row, .ft-buttons {
+.button-row,
+.ft-buttons {
   display: flex;
   justify-content: center;
   gap: 45px;
   flex-wrap: wrap;
+  padding-top: 25px;
 }
 
 /* Back buttons */
@@ -122,8 +127,12 @@ button:hover {
   display: flex;
   justify-content: center;
   gap: 12px;
-  border-top: 1px solid rgba(0,0,0,0.06);
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
   position: sticky;
   bottom: 0;
-  background: linear-gradient(180deg, rgba(255,255,255,0), rgba(255,255,255,1));
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0),
+    rgba(255, 255, 255, 1)
+  );
 }

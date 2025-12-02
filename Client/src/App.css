@@ -41,15 +41,16 @@ body,
 
 /* Títulos */
 h1 {
-  font-size: 2.8rem !important;
+  font-size: 2.8rem;
   color: #0f2b68;
   margin-bottom: 16px;
-  padding-top: 80px;
+  padding-top: 0px;
 }
 
 p {
   font-size: 1.2rem !important;
   color: #0f172a;
+  padding-top: 40px;
 }
 
 /* Botões */
@@ -81,7 +82,7 @@ button:hover {
   justify-content: center;
   gap: 45px;
   flex-wrap: wrap;
-  padding-top: 25px;
+  padding-top: 50px;
 }
 
 /* Back buttons */

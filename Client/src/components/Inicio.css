@@ -15,7 +15,7 @@
 }
 
 .inicio-title {
-  font-size: 2.6rem;
+  font-size: 3.8rem;
   color: #0f2b68;
   margin-bottom: 0;
 }
@@ -41,7 +41,7 @@
   border: none;
   border-radius: 8px;
   cursor: pointer;
-  transition: .2s;
+  transition: 0.2s;
 }
 
 .inicio-buttons-row button:hover {

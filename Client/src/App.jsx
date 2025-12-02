@@ -6,26 +6,27 @@ import Quiz from "./components/Quiz";
 import FollowTreatment from "./components/FollowTreatment";
 import RegisterAppointment from "./components/RegisterAppointment";
 import Check from "./components/Check";
+import Inicio from "./components/Inicio";
 
 // Ele verifica se existe o token antes de deixar entrar
 
 const RotaProtegida = ({ children }) => {
   const token = localStorage.getItem("token");
 
-  // Se não tiver token, chuta o usuário para a tela de Login ("/")
+  // Se nï¿½o tiver token, chuta o usuï¿½rio para a tela de Login ("/")
   if (!token) {
     return <Navigate to="/" replace />;
   }
 
-  // Se tiver token, renderiza o conteúdo (a Home)
+  // Se tiver token, renderiza o conteï¿½do (a Home)
   return children;
 };
 
 function SistemaDoJogo() {
-  const [tela, setTela] = useState("Introdução");
+  const [tela, setTela] = useState("Introduï¿½ï¿½o");
   const [documentAccepted, setDocumentAccepted] = useState(false);
 
-  // Função para DESLOGAR 
+  // Funï¿½ï¿½o para DESLOGAR 
   const handleLogout = () => {
     localStorage.removeItem("token"); 
     window.location.reload();         
@@ -37,22 +38,19 @@ function SistemaDoJogo() {
     </div>
   );
 
-  if (tela === "Introdução") {
+  if (tela === "Introduï¿½ï¿½o") {
     return (
-      <div className="intro" onClick={() => setTela("Início")}>
+      <div className="intro" onClick={() => setTela("Inï¿½cio")}>
       </div>
     );
   }
 
-  if (tela === "Início") {
-    return renderWrapper(
-      <>
-        <h1 className="main-title">SaÃºde em Jogo</h1>
-        <div className="button-row main-buttons">
-          <button onClick={() => setTela("confirmar-quiz")}>Quiz sobre ISTs</button>
-          <button onClick={() => setTela("acompanhar")}>Acompanhar tratamento</button>
-        </div>
-      </>
+  if (tela === "Inï¿½cio") {
+    return (
+      <Inicio
+        irParaQuiz={() => setTela("confirmar-quiz")}
+        irParaAcompanhar={() => setTela("acompanhar")}
+      />
     );
   }
 
@@ -63,20 +61,20 @@ function SistemaDoJogo() {
         <p>VocÃª estÃ¡ prestes a iniciar o Quiz sobre ISTs. Deseja continuar?</p>
         <div className="button-row">
           <button onClick={() => setTela("quiz")}>Iniciar</button>
-          <button onClick={() => setTela("Início")}>Voltar</button>
+          <button onClick={() => setTela("Inï¿½cio")}>Voltar</button>
         </div>
       </>
     );
   }
 
   if (tela === "quiz") {
-    return <Quiz voltarInicio={() => setTela("Início")} />;
+    return <Quiz voltarInicio={() => setTela("Inï¿½cio")} />;
   }
 //acompanhar tratamento
   if (tela === "acompanhar") {
     return (
       <FollowTreatment
-        onBack={() => setTela("Início")}
+        onBack={() => setTela("Inï¿½cio")}
         onFirstAction={() => setTela("registrar-consulta")}
         onSecondAction={() => setTela("check")}
       />
@@ -105,10 +103,10 @@ export default function App() {
   return (
     <Router>
       <Routes>
-        {/* Rota Pública: Login */}
+        {/* Rota Pï¿½blica: Login */}
         <Route path="/" element={<Login />} />
 
-        {/* Rota Pública: Cadastro (se existir) */}
+        {/* Rota Pï¿½blica: Cadastro (se existir) */}
         <Route path="/cadastro" element={<div>Cadastro</div>} />
 
         {/* Rota PROTEGIDA: Home */}
